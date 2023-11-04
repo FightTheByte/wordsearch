@@ -1,19 +1,23 @@
+import { searchForMatch } from "./searchForMatch.js";
+
 let obj = {
     0: ['a' , 'a', 'l'],
     1: ['n', 'b', 'x'],
     2: ['t', 'a', 'c']
   };
   
-  let words = ['ant','cat'];
+  //let words = ['ant','cat'];
   let place = 0;
   let locationArray = [];
   
   function search(words){
+    let words = ['ant','cat'];
     let letterPosition = [];
     let wordRelation = 0;
-    for(i in words){
+    console.log(words)
+    for(word in words){
         for(j in obj){
-          letterPosition.push(algo(words[i], j));
+          letterPosition.push(algo(words[word], j));
         }
     }
     
@@ -67,10 +71,6 @@ let obj = {
         searchForMatch(i, word, 'bottomLeft');
       }  
     }
-  };
-  
-  function searchForMatch(){
-  
   };
   
   search(words);
