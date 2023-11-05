@@ -1,12 +1,12 @@
 import { searchForMatch } from "./searchForMatch.js";
 
 let puzzle = [
-    ['a' , 'a', 't', 'p', 'h', 'o', 'n', 'e', 'a'],
+    ['a', 'a', 't', 'p', 'h', 'o', 'n', 'e', 'a'],
     ['y', 'n', 'a', 't', 'h', 'c', 'r', 'i', 'o'],
     ['t', 't', 'c', 'a', 's', 'a', 'w', 'w', 'f'],
     ['o', 's', 'o', 'h', 'q', 'g', 'r', 'e', 'b'],
     ['e', 't', 'o', 'w', 'o', 'w', 'y', 'o', 's'],
-    ['f', 'h', 'j', 'j', 'l', 'r', 'c', 'g', 'h']
+    ['f', 'h', 's', 'j', 'l', 'r', 'c', 'g', 'h']
 ];
 
   
@@ -21,7 +21,8 @@ let puzzle = [
     'tow', 
     'pharoh',
     'phone',
-    'anchor'
+    'anchor',
+    'tacoos'
   ];
   
   function search(words){
@@ -86,7 +87,7 @@ let puzzle = [
         }
       }  
       
-      if((4 - (key-1)) - word.length >= 0){
+      if((puzzle.length - key) - word.length >= 0){
         let ans = searchForMatch(i, word, 'down', puzzle, key);
         if(ans){
           return ans;
@@ -124,6 +125,5 @@ let puzzle = [
     
   };
   
-  search(words);
-  
+  search(words)
   
