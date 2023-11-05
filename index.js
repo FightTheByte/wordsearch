@@ -22,7 +22,7 @@ let puzzle = [
     'pharoh',
     'phone',
     'anchor',
-    'tacoos'
+    'tacos'
   ];
   
   function search(words){
