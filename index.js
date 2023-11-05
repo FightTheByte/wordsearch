@@ -39,7 +39,7 @@ let puzzle = [
       
   };
 
-function searchForWords(letterPosition, wordRelation = 0){
+  function searchForWords(letterPosition, wordRelation = 0){
     for(let x = 0; x < words.length; x++){
       let ans = sortIndices(letterPosition[x], x, words[wordRelation]);
       if(ans){
