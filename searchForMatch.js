@@ -1,159 +1,65 @@
 import _ from 'lodash'; 
 
-export function searchForMatch(indexPosition, word, direction, words, key, originalPuzzle){
-  //console.log(key, indexPosition, words, direction)
-  //console.log('attempts', word)
-  const ansRefresh = _.cloneDeep(originalPuzzle);
-  if(direction === 'down'){
-    let check = 1;
+export function searchForMatch(indexPosition, word, direction, originalPuzzle, key){
+  const ans = _.cloneDeep(originalPuzzle);
+  let check = 1;
     for(let i of word.split('').splice(1, word.length)){
-        ansRefresh[key][indexPosition] = '*';
-        key++;
-        if(key > Object.keys(originalPuzzle).length - 1)break;
-        if(i === words[key][indexPosition]){
-            check++;
-            ansRefresh[key][indexPosition] = '*';
-            if(check === word.length){
-              console.log(word);
-              console.log(originalPuzzle);
-              console.log(ansRefresh);
+      ans[key][indexPosition] = '*';
+      if(direction === 'down'){
+          key++;
+          if(key > originalPuzzle.length - 1)break;
+      }
+      if(direction === 'up'){
+          key--;
+          if(key < 0)break;
+      }
+      if(direction === 'right'){
+          indexPosition++;
+          if(indexPosition > originalPuzzle[0].length - 1)break;
+      }
+      if(direction === 'left'){
+          indexPosition--;
+          if(indexPosition < 0)break;
+      }
+      if(direction === 'topLeft'){
+          key--;
+          indexPosition--;
+          if(key < 0 || indexPosition < 0)break;
+      }
+      if(direction === 'bottomRight'){
+          key++;
+          indexPosition++;
+          if(key > originalPuzzle.length - 1 || indexPosition > originalPuzzle[0].length)break;
+      }
+      if(direction === 'topRight'){
+          key--;
+          indexPosition++;
+          if(key < 0 || indexPosition > originalPuzzle.length - 1)break;
+      }
+      if(direction === 'bottomLeft'){
+          key++;
+          indexPosition--;
+          if(key > originalPuzzle.length - 1 || indexPosition < 0)break;
+      }
+      
+      if(i === originalPuzzle[key][indexPosition]){
+          check++;
+          ans[key][indexPosition] = '*';
+          if(check === word.length){
+              console.log()
+              console.log('Word: ', word);
+              console.log()
+              originalPuzzle.forEach(x => {
+                console.log(x.join(' '));
+              });
+              console.log()
+              ans.forEach(x => {
+                console.log(x.join(' '));
+              });
               return true;
           }
-        }
+      } else {
+          return false;
+      }
     }
-    return false;
-  }
-  if(direction === 'up'){
-    let check = 1;
-    for(let i of word.split('').splice(1, word.length)){
-        ansRefresh[key][indexPosition] = '*';
-        key--;
-        if(key < 0)break;
-        if(i === words[key][indexPosition]){
-            check++;
-            ansRefresh[key][indexPosition] = '*';
-            if(check === word.length){
-              console.log(word);
-              console.log(originalPuzzle);
-              console.log(ansRefresh);
-              return true;
-          }
-        }
-    }
-    return false;
-  }
-  if(direction === 'right'){
-    let check = 1;
-    for(let i of word.split('').splice(1, word.length)){
-        ansRefresh[key][indexPosition] = '*';
-        indexPosition++;
-        if(indexPosition > originalPuzzle[0].length - 1)break;
-        if(i === words[key][indexPosition]){
-            check++;
-            ansRefresh[key][indexPosition] = '*';
-            if(check === word.length){
-              console.log(word);
-              console.log(originalPuzzle);
-              console.log(ansRefresh);
-              return true;
-          }
-        }
-    }
-    return false;
-  }
-  if(direction === 'left'){
-    let check = 1;
-    for(let i of word.split('').splice(1, word.length)){
-        ansRefresh[key][indexPosition] = '*';
-        key--;
-        if(key < 0)break;
-        if(i === words[key][indexPosition]){
-            check++;
-            ansRefresh[key][indexPosition] = '*';
-            if(check === word.length){
-              console.log(word);
-              console.log(originalPuzzle);
-              console.log(ansRefresh);
-              return true;
-          }
-        }
-    }
-    return false;
-  }
-  if(direction === 'topLeft'){
-    let check = 1;
-    for(let i of word.split('').splice(1, word.length)){
-        ansRefresh[key][indexPosition] = '*';
-        key--;
-        if(key < 0)break;
-        if(i === words[key][indexPosition]){
-            check++;
-            ansRefresh[key][indexPosition] = '*';
-            if(check === word.length){
-              console.log(word);
-              console.log(originalPuzzle);
-              console.log(ansRefresh);
-              return true;
-          }
-        }
-    }
-    return false;
-  }
-  if(direction === 'bottomRight'){
-    let check = 1;
-    for(let i of word.split('').splice(1, word.length)){
-        ansRefresh[key][indexPosition] = '*';
-        key--;
-        if(key < 0)break;
-        if(i === words[key][indexPosition]){
-            check++;
-            ansRefresh[key][indexPosition] = '*';
-            if(check === word.length){
-              console.log(word);
-              console.log(originalPuzzle);
-              console.log(ansRefresh);
-              return true;
-          }
-        }
-    }
-    return false;
-  }
-  if(direction === 'topLeft'){
-    let check = 1;
-    for(let i of word.split('').splice(1, word.length)){
-        ansRefresh[key][indexPosition] = '*';
-        key--;
-        if(key < 0)break;
-        if(i === words[key][indexPosition]){
-            check++;
-            ansRefresh[key][indexPosition] = '*';
-            if(check === word.length){
-              console.log(word);
-              console.log(originalPuzzle);
-              console.log(ansRefresh);
-              return true;
-          }
-        }
-    }
-    return false;
-  }
-  if(direction === 'bottomLeft'){
-    let check = 1;
-    for(let i of word.split('').splice(1, word.length)){
-        ansRefresh[key][indexPosition] = '*';
-        key--;
-        if(key < 0)break;
-        if(i === words[key][indexPosition]){
-            check++;
-            ansRefresh[key][indexPosition] = '*';
-            if(check === word.length){
-              console.log(word);
-              console.log(originalPuzzle);
-              console.log(ansRefresh);
-              return true;
-          }
-        }
-    }
-    return false;
-  }
 };
