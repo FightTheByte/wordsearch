@@ -1,16 +1,28 @@
 import { searchForMatch } from "./searchForMatch.js";
 
-let puzzle = {
-    0: ['a' , 'a', 't', 'p'],
-    1: ['y', 'n', 'a', 'l'],
-    2: ['t', 't', 'c', 'o'],
-    3: ['s', 's', 'o', 't']
-};
+let puzzle = [
+    ['a' , 'a', 't', 'p', 'h', 'o', 'n', 'e', 'a'],
+    ['y', 'n', 'a', 't', 'h', 'c', 'r', 'i', 'o'],
+    ['t', 't', 'c', 'a', 's', 'a', 'w', 'w', 'f'],
+    ['o', 's', 'o', 'h', 'q', 'g', 'r', 'e', 'b'],
+    ['e', 't', 'o', 'w', 'o', 'w', 'y', 'o', 's'],
+    ['f', 'h', 'j', 'j', 'l', 'r', 'c', 'g', 'h']
+];
 
   
-  let words = ['ants','cat', 'lot', 'so'];
-  let place = 0;
-  let locationArray = [];
+  let words = [
+    'ants', 
+    'to', 
+    'so', 
+    'hat', 
+    'tap', 
+    'towl', 
+    'pat', 
+    'tow', 
+    'pharoh',
+    'phone',
+    'anchor'
+  ];
   
   function search(words){
     let letterPosition = [];
@@ -19,23 +31,25 @@ let puzzle = {
           letterPosition.push(letterAlgo(words[i], j));
         }
     }
-    console.log(letterPosition)
-    searchForWords(letterPosition);
+    try{
+      searchForWords(letterPosition);
+    } catch(e) {
+      console.log('check the puzzle and words are correctly typed')
+    }
+      
   };
 
-  function searchForWords(letterPosition){
-    let wordRelation = 0;
-    for(let x = 0; x < letterPosition.length; x++){
-      let ans = findWordsAlgo(letterPosition[x], x, words[wordRelation]);
+function searchForWords(letterPosition, wordRelation = 0){
+    for(let x = 0; x < words.length; x++){
+      let ans = sortIndices(letterPosition[x], x, words[wordRelation]);
       if(ans){
-        letterPosition = [...letterPosition.slice((Object.keys(puzzle).length), letterPosition.length)];
+        if(words[wordRelation] === words[words.length-1])return;
+        letterPosition = letterPosition.slice(puzzle.length, letterPosition.length + 1);
         wordRelation++;
-        searchForWords(letterPosition);
-      }
-      if((x + 1)%(Object.keys(puzzle).length) === 0){    
-        wordRelation++;
+        break;
       }
     }
+    searchForWords(letterPosition, wordRelation);
   }
   
   function letterAlgo(words, position){
@@ -48,74 +62,66 @@ let puzzle = {
     return a;
   };
   
-  function findWordsAlgo(arr, index, word){
-    let key = ((index)%(Object.keys(puzzle).length) + 1); 
+  function sortIndices(arr, index, word){
+    let key = ((index)%(puzzle.length));
     for(let i of arr){
-      if(false){
-        //console.log(index, (index)%(Object.keys(puzzle).length))
-        searchForMatch(i, word, 'left', puzzle, (index)%(Object.keys(puzzle).length), puzzle);
-      }
-
-      if((puzzle[0].length - i) - word.length >= 0){
-        console.log('right' , index, i)
-        let ans = searchForMatch(
-          i, 
-          word, 
-          'right', 
-          puzzle, 
-          (index)%(Object.keys(puzzle).length), 
-          puzzle
-        );
+      if(i - word.length >= 0){
+        let ans = searchForMatch(i, word, 'left', puzzle, key);
         if(ans){
           return ans;
         }
       }
 
-      if((index)%(Object.keys(puzzle).length) + 1 - (word.length) >= 0){
-        console.log('up')
-        let ans = searchForMatch(
-          i, 
-          word, 
-          'up', 
-          puzzle, 
-          (index)%(Object.keys(puzzle).length), 
-          puzzle
-        );
+      if((puzzle[0].length - i) - word.length >= 0){
+        let ans = searchForMatch(i, word, 'right', puzzle, key);
+        if(ans){
+          return ans;
+        }
+      }
+      
+      if((index)%(puzzle.length) + 1 - (word.length) >= 0){
+        let ans = searchForMatch(i, word, 'up', puzzle, key);
         if(ans){
           return ans;
         }
       }  
       
       if((4 - (key-1)) - word.length >= 0){
-        //console.log('down', word, (4 - (relativeIndex-1)) - word.length)
-        let ans = searchForMatch(
-          i, 
-          word, 
-          'down', 
-          puzzle, 
-          (index)%(Object.keys(puzzle).length), 
-          puzzle
-        );
-        if(ans)break;
+        let ans = searchForMatch(i, word, 'down', puzzle, key);
+        if(ans){
+          return ans;
+        }
       } 
 
-      if(false/*(index + 1)%(Object.keys(puzzle).length) != 0 && i != 0*/){
-        searchForMatch(i, word, 'topLeft', puzzle, (index)%(Object.keys(puzzle).length), puzzle);
+      if((i + 1) - word.length >= 0 && (key + 1) - word.length >= 0){
+        let ans = searchForMatch(i, word, 'topLeft', puzzle, key);
+        if(ans){
+          return ans;
+        }
+      }
+      
+      if(word.length - (i + 1) >= 0 && (key + 1) - word.length >= 0){
+        let ans = searchForMatch(i, word, 'topRight',  puzzle, key);
+        if(ans){
+          return ans;
+        }
       }
 
-      if(false/*(index + 1)%(Object.keys(puzzle).length) != 0 && i != 2*/){
-        searchForMatch(i, word, 'topRight', puzzle, (index)%(Object.keys(puzzle).length), puzzle);
+      if(word.length - (i + 1) >= 0 && word.length - (key + 1) >= 0){
+        let ans = searchForMatch(i, word, 'bottomRight',  puzzle, key);
+        if(ans){
+          return ans;
+        }
       }
 
-      if(false/*(index + 1)%(Object.keys(puzzle).length) != puzzle[0].length-1 && i != 2*/){
-        searchForMatch(i, word, 'bottomRight', puzzle, (index)%(Object.keys(puzzle).length), puzzle);
-      }
-
-      if(false/*(index + 1)%(Object.keys(puzzle).length) != puzzle[0].length-1 && i != 0*/){
-        searchForMatch(i, word, 'bottomLeft', puzzle, (index)%(Object.keys(puzzle).length), puzzle);
+      if((i) - word.length >= 0 && word.length - (key + 1) >= 0){
+        let ans = searchForMatch(i, word, 'bottomLeft',  puzzle, key);
+        if(ans){
+          return ans;
+        }
       }  
     }
-    return false;
+    
   };
   
   search(words);
