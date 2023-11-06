@@ -7,15 +7,15 @@ export function searchForMatch(index, columnPosition, word, direction, originalP
         ans[index] = '*';
         if(direction === 'down'){
           rowPosition++;
-          if(rowPosition > rows )break;
+          if((rowPosition + 1) > rows )break;
         }
         if(direction === 'up'){
           rowPosition--;
-          if(rowPosition < 0)break;
+          if(rowPosition  < 0)break;
         }
         if(direction === 'right'){
           columnPosition++;
-          if(columnPosition > columns)break;
+          if((columnPosition + 1) > columns)break;
         }
         if(direction === 'left'){
           columnPosition--;
@@ -24,7 +24,7 @@ export function searchForMatch(index, columnPosition, word, direction, originalP
         if(direction === 'topLeft'){
           rowPosition--;
           columnPosition--;
-          if((rowPosition + 1) < 0 || columnPosition < 0)break;
+          if(rowPosition  < 0 || columnPosition < 0)break;
         }
         if(direction === 'bottomRight'){
           rowPosition++;
@@ -34,7 +34,7 @@ export function searchForMatch(index, columnPosition, word, direction, originalP
         if(direction === 'topRight'){
           rowPosition--;
           columnPosition++;
-          if((rowPosition + 1) < 0 || columnPosition > columns)break;
+          if(rowPosition  < 0 || columnPosition > columns)break;
         }
         if(direction === 'bottomLeft'){
           rowPosition++;
