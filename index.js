@@ -74,13 +74,13 @@ import { puzzle } from "./puzzle.js";
   };
   
   //words to find, columns, rows
-  
+
   //search(words, 16, 17);
 
   let time = new Date().getTime();
-  for(let i = 0; i < 101; i++){
+  for(let i = 0; i < 1; i++){
     search(words, 16, 17);
   }
-  console.log(new Date().getTime() - time)
+  console.log('solved in ' + (new Date().getTime() - time) + 'ms')
   
   
