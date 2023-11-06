@@ -29,12 +29,12 @@ export function searchForMatch(index, columnPosition, word, direction, originalP
         if(direction === 'bottomRight'){
           rowPosition++;
           columnPosition++;
-          if((rowPosition + 1) > rows || columnPosition > columns)break;
+          if((rowPosition + 1) > rows || (columnPosition + 1) > columns)break;
         }
         if(direction === 'topRight'){
           rowPosition--;
           columnPosition++;
-          if(rowPosition  < 0 || columnPosition > columns)break;
+          if(rowPosition  < 0 || (columnPosition + 1) > columns)break;
         }
         if(direction === 'bottomLeft'){
           rowPosition++;
