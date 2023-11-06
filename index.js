@@ -30,7 +30,6 @@ import { puzzle } from "./puzzle.js";
         }
       }
       if((columnPosition + 1) + word.length <= rows){
-
         let ans = searchForMatch(index, columnPosition, word, 'right', puzzle, rowPosition, columns, rows);
         if(ans){
           return ans;
@@ -60,14 +59,12 @@ import { puzzle } from "./puzzle.js";
           return ans;
         }
       }
-
       if(word.length - (columnPosition) >= 0 && word.length - (rowPosition + 1) >= 0){
         let ans = searchForMatch(index, columnPosition, word, 'bottomRight',  puzzle, rowPosition, columns, rows);
         if(ans){
           return ans;
         }
       }
-
       if((columnPosition) - word.length >= 0 && word.length - (rowPosition + 1) >= 0){
         let ans = searchForMatch(index, columnPosition, word, 'bottomLeft',  puzzle, rowPosition, columns, rows);
         if(ans){
@@ -77,6 +74,7 @@ import { puzzle } from "./puzzle.js";
   };
   
   //words to find, columns, rows
+  
   //search(words, 16, 17);
 
   let time = new Date().getTime();

@@ -52,11 +52,9 @@ export function searchForMatch(index, columnPosition, word, direction, originalP
                 console.log(ans.slice(i, i + columns).join(' '));
         
               }
-            
-              
               return true;
           }
-      } 
+        } 
     }
     return false;
 };
