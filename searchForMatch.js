@@ -47,11 +47,12 @@ export function searchForMatch(index, columnPosition, word, direction, originalP
             if(check === word.length){
               console.log()
               console.log('Word: ', word);
-              console.log()
+              console.log();
+              for(let i = 0; i < ans.length; i+= columns){
+                console.log(ans.slice(i, i + columns).join(' '));
+        
+              }
             
-              console.log(originalPuzzle)
-              console.log()
-              console.log(ans)
               
               return true;
           }
