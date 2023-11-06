@@ -1,53 +1,50 @@
 import _ from 'lodash'; 
 
-export function searchForMatch(index, indexPosition, word, direction, originalPuzzle, key, rows){
+export function searchForMatch(index, columnPosition, word, direction, originalPuzzle, rowPosition, columns, rows){
   const ans = _.cloneDeep(originalPuzzle);
   let check = 1;
     for(let i of word.split('').slice(1, word.length)){
         ans[index] = '*';
         if(direction === 'down'){
-          key++;
-          if(key > originalPuzzle.length - 1)break;
-    /*  }
-      if(direction === 'up'){
-          key--;
-          if(key < 0)break;
-      }
-      if(direction === 'right'){
-          indexPosition++;
-          if(indexPosition > 8){break};
-      }*/
-      if(direction === 'left'){
-          indexPosition--;
-      
-          if(indexPosition < 0)break;
-      }/*
-      if(direction === 'topLeft'){
-          key--;
-          indexPosition--;
-          if(key < 0 || indexPosition < 0)break;
-      }
-      if(direction === 'bottomRight'){
-          key++;
-          indexPosition++;
-          if(key > rows || indexPosition > 8)break;
-      }
-      if(direction === 'topRight'){
-          key--;
-          indexPosition++;
-          if(key < 0 || indexPosition > (columns-1))break;
-      }
-      if(direction === 'bottomLeft'){
-          key++;
-          indexPosition--;
-          if(key > (rows - 1) || indexPosition < 0)break;
-      */  }
-      //console.log('i ', i, 'index ', index, ' indexPosition ', indexPosition, ' original ', originalPuzzle[index], 'key ', key)
-      if(i === originalPuzzle[(key+1) * indexPosition]){
-        
-          check++;
-          ans[(key+1) * indexPosition] = '*';
-          if(check === word.length){
+          rowPosition++;
+          if(rowPosition > (rows + 1))break;
+        }
+        if(direction === 'up'){
+          rowPosition--;
+          if(rowPosition < 0)break;
+        }
+        if(direction === 'right'){
+          columnPosition++;
+          if(columnPosition > columns)break;
+        }
+        if(direction === 'left'){
+          columnPosition--;
+          if(columnPosition < 0)break;
+        }
+        if(direction === 'topLeft'){
+          rowPosition--;
+          columnPosition--;
+          if((rowPosition + 1) < 0 || columnPosition < 0)break;
+        }
+        if(direction === 'bottomRight'){
+          rowPosition++;
+          columnPosition++;
+          if((rowPosition + 1) > rows || columnPosition > columns)break;
+        }
+        if(direction === 'topRight'){
+          rowPosition--;
+          columnPosition++;
+          if((rowPosition + 1) < 0 || columnPosition > columns)break;
+        }
+        if(direction === 'bottomLeft'){
+          rowPosition++;
+          columnPosition--;
+          if((rowPosition + 1) > rows  || columnPosition < 0)break;
+        }
+        if(i === originalPuzzle[(rowPosition * columns) + columnPosition]){
+            check++;
+            ans[(rowPosition * columns) + columnPosition] = '*';
+            if(check === word.length){
               console.log()
               console.log('Word: ', word);
               console.log()
@@ -58,8 +55,7 @@ export function searchForMatch(index, indexPosition, word, direction, originalPu
               
               return true;
           }
-      } else {
-          return false;
-      }
+      } 
     }
+    return false;
 };
