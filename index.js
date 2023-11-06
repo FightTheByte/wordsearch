@@ -66,13 +66,13 @@ let words = [
   function sortIndices(index, word, columns, rows){
     let columnPosition = index%columns;
     let rowPosition =  Math.floor(index / columns);
-      if(columnPosition - word.length >= 0){
+      if((columnPosition + 1) - word.length > -1){
         let ans = searchForMatch(index, columnPosition, word, 'left', puzzle, rowPosition, columns, rows);
         if(ans){
           return true;
         }
       }
-      if(columnPosition + word.length <= rows){
+      if((columnPosition + 1) + word.length <= rows){
 
         let ans = searchForMatch(index, columnPosition, word, 'right', puzzle, rowPosition, columns, rows);
         if(ans){
