@@ -2,28 +2,47 @@ import { searchForMatch } from "./searchForMatch.js";
   
 let puzzle = 
   [
-    'a', 'a', 't', 'p', 'h', 'o', 'n', 'e', 'a',
-    'y', 'n', 'a', 't', 'h', 'c', 'r', 'i', 'o',
-    't', 't', 'c', 'a', 's', 'a', 'w', 'w', 'f',
-    'o', 's', 'o', 'h', 'q', 'g', 'r', 'e', 'b',
-    'e', 't', 'o', 'w', 'o', 'w', 'y', 'o', 's',
-    'f', 'h', 's', 'j', 'l', 'r', 'c', 'g', 'h',
+    'c', 'i', 's', 'l', 'e', 'f', 'o', 'l', 'i', 'a', 't', 'i', 'o', 'n', 's', 'd',
+    'p', 'y', 'h', 'k', 'z', 't', 'm', 'g', 'h', 'o', 'i', 'o', 'b', 'n', 't', 'z',
+    'e', 'j', 'u', 'b', 'n', 'a', 'i', 'r', 'b', 'm', 'a', 'c', 'o', 'p', 'y', 'f',
+    'n', 's', 't', 'u', 'f', 'g', 'w', 'l', 'd', 'g', 'a', 'r', 'w', 't', 'o', 'l',
+    'o', 'h', 'c', 'i', 't', 'd', 's', 'w', 'o', 'f', 'r', 'g', 'y', 'a', 'l', 'e',
+    't', 'w', 'c', 'h', 'v', 'e', 'k', 'y', 'd', 'b', 't', 'h', 'm', 'c', 'e', 'r',
+    's', 'k', 'r', 'r', 'i', 'g', 'k', 'r', 'm', 'v', 'i', 'f', 'i', 'a', 'w', 'c',
+    'd', 'l', 'u', 'e', 'd', 's', 'b', 'a', 'r', 'u', 'u', 'h', 'r', 'u', 'i', 'i',
+    'n', 'r', 'r', 'm', 'n', 'b', 't', 't', 'u', 'i', 'p', 'g', 'p', 'g', 's', 'h',
+    'a', 't', 'a', 'd', 's', 'i', 'h', 'n', 'j', 'r', 'z', 'y', 'r', 'm', 'i', 'p',
+    's', 'k', 'b', 'p', 'c', 't', 'o', 'e', 'o', 'r', 't', 'u', 'e', 's', 'a', 'r',
+    'g', 'n', 'e', 'i', 's', 's', 't', 'm', 'o', 'o', 'r', 'r', 't', 'e', 'n', 'o', 
+    't', 'j', 'n', 'u', 'c', 'd', 'a', 'i', 'r', 'v', 'a', 'l', 'r', 'u', 'm', 'm',
+    'p', 'e', 'r', 'w', 'b', 't', 'l', 'd', 'e', 'f', 'u', 'h', 'a', 'h', 'r', 'a',
+    'r', 'h', 't', 'b', 'e', 'b', 'q', 'e', 'y', 'a', 'q', 'g', 'c', 'c', 'r', 't',
+    't', 'q', 'w', 'm', 'e', 't', 'r', 's', 'f', 'y', 'j', 'v', 'd', 'r', 'i', 'e',
+    'k', 'g', 'j', 'e', 'n', 'n', 'a', 'e', 't', 'i', 't', 'a', 'm', 'g', 'i', 'm',
   ];
 
 
 let words = [
-  'ants', 
-  'to', 
-  'so', 
-  'hat', 
-  'tap', 
-  'towl', 
-  'pat', 
-  'tow', 
-  'pharoh',
-  'phone',
-  'anchor',
-  'tacos'
+  'amphibolite', 
+  'cambrian', 
+  'dyke', 
+  'faults', 
+  'feldspar', 
+  'felsic', 
+  'foliation', 
+  'gneiss', 
+  'lewisian',
+  'mafic',
+  'magma',
+  'metamorphic',
+  'mica',
+  'migmatite',
+  'moine',
+  'quartz',
+  'sandstone',
+  'schist',
+  'sedimentary',
+  'thrust'
 ];
 
 
@@ -72,20 +91,20 @@ let words = [
           return ans;
         }
       } 
-      if((columnPosition + 1) - word.length >= 0 && (rowPosition + 1) - word.length >= 0){
+      if((columnPosition) - word.length >= 0 && (rowPosition + 1) - word.length >= 0){
         let ans = searchForMatch(index, columnPosition, word, 'topLeft', puzzle, rowPosition, columns, rows);
         if(ans){
           return ans;
         }
       }
-      if(word.length - (columnPosition + 1) >= 0 && (rowPosition + 1) - word.length >= 0){
+      if((columnPosition) + word.length <= columns && (rowPosition + 1) - word.length >= 0){
         let ans = searchForMatch(index, columnPosition, word, 'topRight',  puzzle, rowPosition, columns, rows);
         if(ans){
           return ans;
         }
       }
 
-      if(word.length - (columnPosition + 1) >= 0 && word.length - (rowPosition + 1) >= 0){
+      if(word.length - (columnPosition) >= 0 && word.length - (rowPosition + 1) >= 0){
         let ans = searchForMatch(index, columnPosition, word, 'bottomRight',  puzzle, rowPosition, columns, rows);
         if(ans){
           return ans;
@@ -101,7 +120,7 @@ let words = [
   };
   
   //words to find, columns, rows
-  search(words, 9, 6);
+  search(words, 16, 17);
 
   /*let date = new Date().getMilliseconds();
   for(let i = 0; i < 101; i++){
