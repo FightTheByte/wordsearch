@@ -54,7 +54,7 @@ let words = [
         }
       }
       if(columnPosition + word.length <= rows){
-        console.log(word)
+
         let ans = searchForMatch(index, columnPosition, word, 'right', puzzle, rowPosition, columns, rows);
         if(ans){
           return ans;
