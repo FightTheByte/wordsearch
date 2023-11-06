@@ -120,12 +120,12 @@ let words = [
   };
   
   //words to find, columns, rows
-  search(words, 16, 17);
+  //search(words, 16, 17);
 
-  /*let date = new Date().getMilliseconds();
+  let time = new Date().getTime();
   for(let i = 0; i < 101; i++){
-    search(words, 9, 6);
+    search(words, 16, 17);
   }
-  console.log(date - new Date().getMilliseconds())
-  */
+  console.log(new Date().getTime() - time)
+  
   
