@@ -7,7 +7,7 @@ export function searchForMatch(index, columnPosition, word, direction, originalP
         ans[index] = '*';
         if(direction === 'down'){
           rowPosition++;
-          if(rowPosition > (rows + 1))break;
+          if(rowPosition > rows )break;
         }
         if(direction === 'up'){
           rowPosition--;
