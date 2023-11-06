@@ -100,12 +100,13 @@ let words = [
       }    
   };
   
-  search(words, 9, 6)
+  //words to find, columns, rows
+  search(words, 9, 6);
 
   /*let date = new Date().getMilliseconds();
   for(let i = 0; i < 101; i++){
-    
+    search(words, 9, 6);
   }
-  console.log(date - new Date().getMilliseconds())*/
-  
+  console.log(date - new Date().getMilliseconds())
+  */
   
